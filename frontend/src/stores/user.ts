@@ -1,10 +1,11 @@
+import { login, signup } from '@/services/user.service'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 export interface User {
   id: number
   email: string
-  name: string
+  role: string
   token?: string
 }
 
@@ -13,17 +14,12 @@ export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null)
 
   // --- Actions ---
-  const login = async (email: string, password: string) => {
-    // TODO: replace with real backend call later
-    console.log('Logging in with:', email, password)
+  const loginUser = async (email: string, password: string, ) => {
+    user.value = await login(email, password)
+  }
 
-    // Simulate successful login
-    user.value = {
-      id: 1,
-      email,
-      name: 'Yahav Freeman',
-      token: 'fake-jwt-token',
-    }
+  const signUserup = async (email: string, password: string, role: string) => {
+    user.value = await signup(email, password, role)
   }
 
   const logout = () => {

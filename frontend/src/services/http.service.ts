@@ -1,4 +1,3 @@
-// src/services/http.service.ts
 import Axios from "axios";
 import type { Method, AxiosRequestConfig } from "axios";
 

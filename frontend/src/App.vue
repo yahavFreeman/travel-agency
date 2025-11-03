@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
-import { RouterLink, RouterView } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore();
+const router = useRouter()
+
+const logout = () => {
+  userStore.logout();
+  router.push('/');
+}
 </script>
 
 <template>
-<div class="bg-gray-100">
-  <header>
-
-    <div class="wrapper pt-2 px-4 flex items-center justify-between">
+  <header class="wrapper pt-2 px-4 flex items-center justify-between">
       <template v-if="userStore.isLoggedIn">
         <button
-          @click="userStore.logout()"
-          class="bg-red-200 text-white rounded-lg py-1 px-2 font-medium hover:bg-red-300 transition"
+          @click="logout()"
+          class="bg-red-200 text-white rounded-lg py-1 px-2 font-medium hover:bg-red-300 transition cursor-pointer"
         >
           Log Out
         </button>
@@ -25,11 +28,9 @@ const userStore = useUserStore();
       </template>
       <!-- <nav>
       </nav> -->
-    </div>
   </header>
 
   <RouterView />
-</div>
 </template>
 
 

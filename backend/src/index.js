@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import"./data/data-source.js";
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './api/user/user.routes.js';
+import vacationRoutes from './api/vacation/vacation.routes.js';
 
 dotenv.config();
 
@@ -28,6 +28,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/vacation', vacationRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend is running!');

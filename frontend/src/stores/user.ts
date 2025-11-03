@@ -9,25 +9,25 @@ export interface User {
   token?: string
 }
 
-export const useUserStore = defineStore('user', () => {
-  // --- State ---
-  const user = ref<User | null>(null)
+export const useUserStore = defineStore("user", {
+  state: () => ({
+    user: null as User | null,
+  }),
+  getters: {
+    isLoggedIn: (state) => !!state.user, // <-- computed from state
+  },
+  actions: {
+    async loginUser(email: string, password: string) {
+      this.user = await login(email, password);
+    },
+    async signUserup(email: string, password: string, role: string) {
+      this.user = await signup(email, password, role);
+    },
+    logout() {
+      this.user = null;
+    },
+  },
+  persist: true, // keeps `user` across page reloads
+});
 
-  // --- Actions ---
-  const loginUser = async (email: string, password: string, ) => {
-    user.value = await login(email, password)
-  }
 
-  const signUserup = async (email: string, password: string, role: string) => {
-    user.value = await signup(email, password, role)
-  }
-
-  const logout = () => {
-    user.value = null
-  }
-
-  // --- Getters ---
-  const isLoggedIn = computed(() => !!user.value)
-
-  return { user, isLoggedIn, login, logout }
-})

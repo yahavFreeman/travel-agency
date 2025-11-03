@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "vue3-easy-data-table": "^1.5.47"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
+}
